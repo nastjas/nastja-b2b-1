@@ -87,13 +87,13 @@ function buildNewCustomerBanner() {
   const banner = document.createElement('div');
   banner.className = 'dashboard-new-customer-banner';
   banner.setAttribute('role', 'region');
-  banner.setAttribute('aria-label', 'Welcome to Continental');
+  banner.setAttribute('aria-label', 'Welcome to Motorservice');
   banner.style.cssText = 'display:block !important; min-height:1px;'; /* fallback visibility */
 
   banner.innerHTML = `
     <div class="dashboard-new-customer-banner__inner">
       <div class="dashboard-new-customer-banner__content">
-        <h2 class="dashboard-new-customer-banner__heading">Welcome to Continental</h2>
+        <h2 class="dashboard-new-customer-banner__heading">Welcome to Motorservice</h2>
         <p class="dashboard-new-customer-banner__text">
           You're all set up. Get started by creating your first order — use the button in the top right to place an order.
         </p>
@@ -122,9 +122,9 @@ function buildWelcomeBanner(customerName) {
   banner.innerHTML = `
     <div class="dashboard-welcome__text">
       <h1 class="dashboard-welcome__heading">
-        ${customerName ? `Welcome back, ${customerName}!` : 'Welcome to Continental'}
+        ${customerName ? `Welcome back, ${customerName}!` : 'Welcome to Motorservice'}
       </h1>
-      <p class="dashboard-welcome__sub">Your brick & construction supply hub</p>
+      <p class="dashboard-welcome__sub">Your engine components supply hub</p>
     </div>
     <a href="${rootLink('/order')}" class="dashboard-welcome__cta">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

@@ -15,13 +15,13 @@
 
 import { getCodeAssetUrl } from '../../scripts/commerce.js';
 
-/* ── Demo low-stock tire (fake) ────────────────────────────────────────────
-   The live Commerce catalog belongs to a different demo (bricks), so the Low
-   Stock Alert would surface an unrelated SKU. For this Continental demo we show
-   a fixed tire product instead of the live stock data. */
+/* ── Demo low-stock item (fake) ────────────────────────────────────────────
+   The live Commerce catalog may not carry the featured MS Motorservice parts,
+   so the Low Stock Alert would surface an unrelated SKU. For this demo we show
+   a fixed engine component instead of the live stock data. */
 const DEMO_TIRE = {
-  name: 'AllSeasonContact 2 – 205/55 R16',
-  image: getCodeAssetUrl('/images/tire-allseasoncontact.png'),
+  name: 'EGR Valve – Pierburg',
+  image: getCodeAssetUrl('/icons/ms-logo.svg'),
   qty: 120,
   capacity: 500,
 };

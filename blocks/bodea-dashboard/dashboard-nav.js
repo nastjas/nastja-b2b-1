@@ -125,10 +125,10 @@ export function buildNav(pathname) {
   /* Logo (images/ is served from code bus; rootLink handles locale root) */
   const logoArea = document.createElement('div');
   logoArea.className = 'bodea-nav__logo';
-  const logoSrc = getCodeAssetUrl('/images/continental-logo.svg');
+  const logoSrc = getCodeAssetUrl('/icons/ms-logo.svg');
   logoArea.innerHTML = `
-    <a href="${rootLink('/')}" class="bodea-nav__logo-link" aria-label="Continental Home">
-      <img src="${logoSrc}" alt="Continental - The Future in Motion" class="bodea-nav__logo-img" width="200" height="auto" />
+    <a href="${rootLink('/')}" class="bodea-nav__logo-link" aria-label="Motorservice Home">
+      <img src="${logoSrc}" alt="MS Motorservice" class="bodea-nav__logo-img" width="200" height="auto" />
     </a>
   `;
   nav.appendChild(logoArea);

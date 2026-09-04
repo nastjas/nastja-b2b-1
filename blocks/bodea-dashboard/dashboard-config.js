@@ -33,12 +33,12 @@ export const DEFAULT_SPEND_TREND_WEEKS = 12;
  * Featured tire SKUs (Commerce catalog). Continental passenger-car tire lines.
  */
 export const FEATURED_EQUIPMENT_SKUS = [
-  'ASC2-205-55-R16',
-  'EC6-225-45-R18',
-  'PC7-245-40-R19',
-  'WT870P-225-45-R18',
-  'SC7-255-35-R20',
-  'WT870P-245-40-R19',
+  'MS-EGR-700425',
+  'MS-WP-741100',
+  'MS-PST-998500',
+  'MS-VP-720800',
+  'MS-THR-411570',
+  'MS-TC-172090',
 ];
 
 /** Primary SKU for demo low-stock / notifications (first featured line). */
@@ -48,12 +48,12 @@ export const PRIMARY_EQUIPMENT_SKU = FEATURED_EQUIPMENT_SKUS[0];
  * Product titles for Commerce name field and UI (Continental line – tire size).
  */
 export const EQUIPMENT_CATALOG_NAMES = {
-  'ASC2-205-55-R16': 'AllSeasonContact 2 – 205/55 R16',
-  'EC6-225-45-R18': 'EcoContact 6 – 225/45 R18',
-  'PC7-245-40-R19': 'PremiumContact 7 – 245/40 R19',
-  'WT870P-225-45-R18': 'WinterContact TS 870 P – 225/45 R18',
-  'SC7-255-35-R20': 'SportContact 7 – 255/35 R20',
-  'WT870P-245-40-R19': 'WinterContact TS 870 P – 245/40 R19',
+  'MS-EGR-700425': 'EGR Valve – Pierburg',
+  'MS-WP-741100': 'Electric Water Pump – Pierburg',
+  'MS-PST-998500': 'Piston Kit – Kolbenschmidt',
+  'MS-VP-720800': 'Vacuum Pump – Pierburg',
+  'MS-THR-411570': 'Thermostat – BF',
+  'MS-TC-172090': 'Turbocharger – Turbo by INTEC',
 };
 
 /**
@@ -66,36 +66,36 @@ export const EQUIPMENT_DISPLAY_NAMES = { ...EQUIPMENT_CATALOG_NAMES };
  * for the SKU.
  */
 export const EQUIPMENT_CATALOG_PRICES_USD = {
-  'ASC2-205-55-R16': 109,
-  'EC6-225-45-R18': 121,
-  'PC7-245-40-R19': 158,
-  'WT870P-225-45-R18': 136,
-  'SC7-255-35-R20': 194,
-  'WT870P-245-40-R19': 164,
+  'MS-EGR-700425': 189,
+  'MS-WP-741100': 245,
+  'MS-PST-998500': 312,
+  'MS-VP-720800': 156,
+  'MS-THR-411570': 42,
+  'MS-TC-172090': 640,
 };
 
 /**
  * Legacy SKUs → canonical tire SKUs (Commerce migration; see scripts).
  */
 export const LEGACY_EQUIPMENT_SKU_MIGRATION = [
-  { from: 'CHEP-UK-WOOD-1200X1000-01', to: 'ASC2-205-55-R16' },
-  { from: 'CHEP-EU-WOOD-1200X800-03', to: 'EC6-225-45-R18' },
-  { from: 'CHEP-WOOD-METAL-800X600-08', to: 'PC7-245-40-R19' },
-  { from: 'CHEP-PLASTIC-1200X800-01120', to: 'WT870P-225-45-R18' },
-  { from: 'CHEP-PLASTIC-1200X1000-LIPS-00077', to: 'SC7-255-35-R20' },
-  { from: 'CHEP-PLASTIC-QTR-600X400-16', to: 'WT870P-245-40-R19' },
+  { from: 'CHEP-UK-WOOD-1200X1000-01', to: 'MS-EGR-700425' },
+  { from: 'CHEP-EU-WOOD-1200X800-03', to: 'MS-WP-741100' },
+  { from: 'CHEP-WOOD-METAL-800X600-08', to: 'MS-PST-998500' },
+  { from: 'CHEP-PLASTIC-1200X800-01120', to: 'MS-VP-720800' },
+  { from: 'CHEP-PLASTIC-1200X1000-LIPS-00077', to: 'MS-THR-411570' },
+  { from: 'CHEP-PLASTIC-QTR-600X400-16', to: 'MS-TC-172090' },
 ];
 
 /**
  * Intermediate SKUs → canonical tire SKUs (after earlier migration).
  */
 export const EQUIPMENT_MSY_TO_BR_SKU_MIGRATION = [
-  { from: 'HCS-MSY-FAC-215102565-450', to: 'ASC2-205-55-R16' },
-  { from: 'HCS-MSY-ENG-215102565-350', to: 'EC6-225-45-R18' },
-  { from: 'HCS-MSY-CMU-215102565-450', to: 'PC7-245-40-R19' },
-  { from: 'HCS-MSY-COM-215102565-450', to: 'WT870P-225-45-R18' },
-  { from: 'HCS-MSY-PRF-215102565-450', to: 'SC7-255-35-R20' },
-  { from: 'HCS-MSY-AIR-215065-040', to: 'WT870P-245-40-R19' },
+  { from: 'HCS-MSY-FAC-215102565-450', to: 'MS-EGR-700425' },
+  { from: 'HCS-MSY-ENG-215102565-350', to: 'MS-WP-741100' },
+  { from: 'HCS-MSY-CMU-215102565-450', to: 'MS-PST-998500' },
+  { from: 'HCS-MSY-COM-215102565-450', to: 'MS-VP-720800' },
+  { from: 'HCS-MSY-PRF-215102565-450', to: 'MS-THR-411570' },
+  { from: 'HCS-MSY-AIR-215065-040', to: 'MS-TC-172090' },
 ];
 
 /**
@@ -107,12 +107,12 @@ export const EQUIPMENT_MSY_TO_BR_SKU_MIGRATION = [
  * are used as the denominator for the stock level bar only.
  */
 export const EQUIPMENT_STOCK_CAPACITY = {
-  'ASC2-205-55-R16': 500,
-  'EC6-225-45-R18': 400,
-  'PC7-245-40-R19': 500,
-  'WT870P-225-45-R18': 500,
-  'SC7-255-35-R20': 500,
-  'WT870P-245-40-R19': 60,
+  'MS-EGR-700425': 500,
+  'MS-WP-741100': 400,
+  'MS-PST-998500': 500,
+  'MS-VP-720800': 500,
+  'MS-THR-411570': 500,
+  'MS-TC-172090': 60,
 };
 
 /**
@@ -150,7 +150,7 @@ export const NAV_ITEMS = [
   },
   {
     id: 'materials',
-    label: 'Order Tires',
+    label: 'Order Parts',
     href: '/order',
     matchPaths: ['/order', '/order-new-delivery', '/equipment'],
     icon: 'materials',
