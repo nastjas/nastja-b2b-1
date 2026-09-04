@@ -208,7 +208,7 @@ function formatCurrency(amount, currency) {
   try {
     return new Intl.NumberFormat('en-GB', {
       style: 'currency',
-      currency: currency || 'GBP',
+      currency: currency || 'EUR',
       maximumFractionDigits: 0,
     }).format(amount);
   } catch {
@@ -221,7 +221,7 @@ function formatAxisSpend(amount, currency) {
   try {
     return new Intl.NumberFormat('en-GB', {
       style: 'currency',
-      currency: currency || 'GBP',
+      currency: currency || 'EUR',
       notation: 'compact',
       maximumFractionDigits: 1,
     }).format(amount);
@@ -544,7 +544,7 @@ export function updateSpendTrendSection(
       meta.textContent = resolved?.source === 'graphql' ? 'From your orders' : 'Weekly breakdown';
     }
 
-    const currency = resolved?.currency ?? points[0]?.currency ?? 'GBP';
+    const currency = resolved?.currency ?? points[0]?.currency ?? 'EUR';
     const amounts = points.map((p) => p.amount).filter((a) => !Number.isNaN(a));
     const positiveAmounts = amounts.filter((a) => a > 0);
     const maxPositive = positiveAmounts.length ? Math.max(...positiveAmounts) : 0;

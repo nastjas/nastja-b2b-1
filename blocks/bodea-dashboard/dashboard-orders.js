@@ -47,7 +47,7 @@ function formatOrderTotal(total) {
   try {
     return new Intl.NumberFormat('en-GB', {
       style: 'currency',
-      currency: total.currency && total.currency !== 'NONE' ? total.currency : 'GBP',
+      currency: total.currency && total.currency !== 'NONE' ? total.currency : 'EUR',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(Number(total.value));

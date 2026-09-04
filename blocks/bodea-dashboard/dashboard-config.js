@@ -217,9 +217,9 @@ export const QUICK_ACTIONS = [
  * To swap providers, update tileUrl / attribution / subdomains here.
  */
 export const MAP_CONFIG = {
-  /** Geographic centre of the UK */
-  center: [54.2, -2.5],
-  zoom: 5,
+  /** Geographic centre of Germany / Central Europe (MS Motorservice HQ: Neuenstadt am Kocher) */
+  center: [51.0, 10.0],
+  zoom: 6,
 };
 
 /**

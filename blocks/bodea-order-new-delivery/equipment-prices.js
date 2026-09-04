@@ -170,7 +170,7 @@ export function formatMoneyAmount(value, currency) {
   try {
     return new Intl.NumberFormat(undefined, {
       style: 'currency',
-      currency: currency || 'GBP',
+      currency: currency || 'EUR',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(value);

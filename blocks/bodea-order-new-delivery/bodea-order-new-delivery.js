@@ -44,9 +44,9 @@ const STEP_TITLES = {
 
 const STEP_DESCRIPTIONS = {
   orderType: 'Choose between a single delivery or a 7-day recurring order.',
-  deliveryDate: 'Select the date your brick packs need to be delivered.',
-  transport: 'Choose Bodea delivery or your own fleet.',
-  equipment: 'Select brick lines and pack quantities for your order.',
+  deliveryDate: 'Select the date your parts need to be delivered.',
+  transport: 'Choose Motorservice delivery or your own fleet.',
+  equipment: 'Select product lines and quantities for your order.',
   siteContact: 'Specify the delivery address and on-site contact details.',
   deliveryWindow: 'Set your preferred delivery time window for the driver.',
 };
@@ -802,7 +802,7 @@ function renderStepBody(stepId, state, siteListId) {
           ${renderChoiceCard({
             name: 'transport',
             value: 'chep',
-            label: 'Bodea delivery',
+            label: 'Motorservice delivery',
             checked: state.data.transport === 'chep',
             stepId,
           })}
@@ -966,7 +966,7 @@ function renderWizard(state, siteListId) {
   return `
     <div class="ond-page-header">
       <h2>Order New Delivery</h2>
-      <p>Create a new B2B masonry delivery order for Bodea brick packs via your account.</p>
+      <p>Create a new B2B parts delivery order for Motorservice parts via your account.</p>
     </div>
     ${state.submitError ? `<div class="ond-form-error" role="alert">${escapeHtml(state.submitError)}</div>` : ''}
     ${renderStepProgressIndicator(state)}
