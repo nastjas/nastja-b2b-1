@@ -10,6 +10,9 @@
  * governing permissions and limitations under the License.
  */
 
+/* MS Motorservice brand tokens (must precede all style rules per CSS @import spec) */
+@import url('brand.css');
+
 /* stylelint-disable no-empty-source */
 :root, .dropin-design {
   /* Adobe Commerce Dropin design tokens */

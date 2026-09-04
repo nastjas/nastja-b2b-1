@@ -1,0 +1,49 @@
+/*
+ * MS Motorservice — Brand design tokens
+ * Extracted from https://www.ms-motorservice.com/int/en
+ * Layered on top of the AEM commerce boilerplate design system,
+ * following the same pattern as the Continental reference project.
+ */
+
+/*
+ * NOTE on selector specificity:
+ * styles.css defines these same tokens in `:root, .dropin-design` AFTER this file
+ * is @imported, so on equal specificity it would win. The doubled selectors below
+ * (:root:root / .dropin-design.dropin-design) raise specificity so the brand tokens
+ * reliably override the boilerplate defaults, in both the global and dropin scopes.
+ */
+:root:root,
+.dropin-design.dropin-design {
+  /* Brand palette (from the MS Motorservice corporate site) */
+  --ms-blue: #0f72b5;          /* primary */
+  --ms-blue-dark: #0c5b90;     /* primary hover */
+  --ms-navy: #00406e;          /* secondary */
+  --ms-navy-dark: #003358;     /* secondary active */
+  --ms-red: #d10019;           /* accent */
+  --ms-black: #1a1a1a;
+  --ms-white: #fff;
+  --ms-muted: #6b7280;
+
+  /* MS Motorservice typography — corporate face is DIN Pro.
+     DIN Pro is a licensed font and is not bundled here; a robust
+     sans-serif fallback stack is used until the licensed webfont is added
+     (mirrors how the reference project falls back to Arial). */
+  --ms-font-family: "DIN Pro", "DINPro", "DIN Next", roboto, arial, helvetica, sans-serif;
+
+  /* Route the boilerplate base font token so all EDS --type-* tokens
+     (headings, body, buttons) inherit the brand font. */
+  --type-base-font-family: "DIN Pro", "DINPro", "DIN Next", roboto, arial, helvetica, sans-serif;
+
+  /* Route the boilerplate brand color scale to the MS Motorservice palette.
+     These drive primary buttons, CTAs, active/hover states and key text/borders. */
+  --color-brand-300: #4a9bd4;   /* light blue tint */
+  --color-brand-500: var(--ms-blue);
+  --color-brand-600: var(--ms-blue-dark);
+  --color-brand-700: var(--ms-navy);
+  --color-button-active: var(--ms-navy);
+  --color-button-hover: var(--ms-blue-dark);
+
+  /* Content links → navy text, blue on hover (matches corporate site tone) */
+  --link-color: var(--ms-navy);
+  --link-hover-color: var(--ms-blue);
+}

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 170" role="img" aria-label="MS Motorservice">
+  <defs>
+    <linearGradient id="msBadge" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#00335a"/>
+      <stop offset="0.55" stop-color="#0f5f9e"/>
+      <stop offset="1" stop-color="#2a86c9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Badge: forward-leaning parallelogram with a lighter right accent -->
+  <polygon points="92,22 196,22 156,148 52,148" fill="url(#msBadge)"/>
+  <polygon points="172,22 196,22 156,148 132,148" fill="#4aa3dc"/>
+
+  <!-- MS lettering -->
+  <text x="70" y="118" font-family="'DIN Pro','DINPro',Arial,Helvetica,sans-serif"
+        font-size="78" font-weight="800" font-style="italic" fill="#ffffff"
+        letter-spacing="-2">MS</text>
+
+  <!-- Wordmark -->
+  <text x="232" y="112" font-family="'DIN Pro','DINPro',Arial,Helvetica,sans-serif"
+        font-size="62" font-weight="700" fill="#3f4650"
+        letter-spacing="2">MOTORSERVICE</text>
+</svg>
