@@ -8,7 +8,7 @@ function formatMoney(amount, currency) {
   try {
     return new Intl.NumberFormat('en-GB', {
       style: 'currency',
-      currency: currency || 'GBP',
+      currency: currency || 'EUR',
       maximumFractionDigits: 0,
     }).format(amount);
   } catch {
@@ -231,7 +231,7 @@ export function updateCompanyCreditSection(section, payload, isAuthenticated) {
 
   available = Math.min(Math.max(0, available), limit);
   const used = Math.max(0, limit - available);
-  const currency = payload?.currency || 'GBP';
+  const currency = payload?.currency || 'EUR';
   const pctExact = limit > 0 ? Math.min(100, (used / limit) * 100) : 0;
   const pct = Math.round(pctExact);
   /* Small usage (e.g. $2.4k of $1m ≈ 0.2%) must not read as a flat "0%".

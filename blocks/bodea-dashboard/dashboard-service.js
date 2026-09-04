@@ -284,18 +284,18 @@ function formatWeekLabel(weekStartDate) {
 
 function orderGrandTotalToNumber(order) {
   const g = order?.grand_total;
-  if (typeof g === 'number' && !Number.isNaN(g)) return { value: g, currency: order.order_currency_code ?? 'GBP' };
+  if (typeof g === 'number' && !Number.isNaN(g)) return { value: g, currency: order.order_currency_code ?? 'EUR' };
   if (g != null && typeof g === 'object') {
     const value = Number(g.base_grand_total ?? g.value ?? g.grand_total);
-    const currency = g.currency_code ?? g.currency ?? 'GBP';
+    const currency = g.currency_code ?? g.currency ?? 'EUR';
     if (!Number.isNaN(value)) return { value, currency };
   }
   const ext = order?.extension_attributes;
   if (ext?.grand_total != null) {
     const value = Number(ext.grand_total);
-    if (!Number.isNaN(value)) return { value, currency: order.order_currency_code ?? 'GBP' };
+    if (!Number.isNaN(value)) return { value, currency: order.order_currency_code ?? 'EUR' };
   }
-  return { value: NaN, currency: 'GBP' };
+  return { value: NaN, currency: 'EUR' };
 }
 
 /**
@@ -309,7 +309,7 @@ function aggregateOrdersIntoWeeklyPoints(items, weekCount = DEFAULT_SPEND_TREND_
   const slotSet = new Set(slots);
   const amounts = new Map();
   const counts = new Map();
-  let currency = 'GBP';
+  let currency = 'EUR';
   let orderCount = 0;
 
   items.forEach((order) => {
@@ -362,7 +362,7 @@ function mergeTrendPointsOntoRollingN(
   const slots = getRollingNMondayKeys(weekCount);
   const slotSet = new Set(slots);
   const amounts = new Map();
-  let cur = currencyHint ?? 'GBP';
+  let cur = currencyHint ?? 'EUR';
 
   incoming.forEach((p, idx) => {
     const rawKey = p.weekKey ?? p.week_start ?? p.period_start ?? p.periodStart;
@@ -473,7 +473,7 @@ export function buildSpendTrendFromOrders(ordersData, periodWeeks = DEFAULT_SPEN
   if (!list.length) {
     return addSpendTrendMetrics({
       points: [],
-      currency: 'GBP',
+      currency: 'EUR',
       orderCount: 0,
       periodWeeks,
       error: null,
@@ -488,7 +488,7 @@ export function buildSpendTrendFromOrders(ordersData, periodWeeks = DEFAULT_SPEN
       return {
         created_at: o.orderDate,
         grand_total: num,
-        order_currency_code: o.total?.currency ?? 'GBP',
+        order_currency_code: o.total?.currency ?? 'EUR',
       };
     })
     .filter((row) => row.created_at && !Number.isNaN(row.grand_total));
@@ -596,7 +596,7 @@ function normaliseSpendTrendPayload(payload) {
     return normaliseSpendTrendPayload({ trend: payload });
   }
   if (payload == null || typeof payload !== 'object') {
-    return { points: [], currency: 'GBP', error: null };
+    return { points: [], currency: 'EUR', error: null };
   }
 
   const currencyHint = payload.currency ?? payload.currency_code;
@@ -608,7 +608,7 @@ function normaliseSpendTrendPayload(payload) {
     const label = String(
       raw.label ?? raw.week ?? raw.period ?? raw.period_label ?? raw.name ?? raw.week_start ?? '—',
     );
-    const cur = raw.currency_code ?? raw.currency ?? currencyHint ?? 'GBP';
+    const cur = raw.currency_code ?? raw.currency ?? currencyHint ?? 'EUR';
     if (Number.isNaN(amount)) return null;
     const weekKey = raw.weekKey ?? raw.week_start ?? raw.period_start ?? raw.periodStart ?? null;
     return {
@@ -647,7 +647,7 @@ function normaliseSpendTrendPayload(payload) {
     };
   }
 
-  return { points: [], currency: currencyHint ?? 'GBP', error: null };
+  return { points: [], currency: currencyHint ?? 'EUR', error: null };
 }
 
 /**
@@ -656,14 +656,14 @@ function normaliseSpendTrendPayload(payload) {
  */
 async function fetchSpendTrend() {
   if (!checkIsAuthenticated()) {
-    return { points: [], currency: 'GBP', error: null };
+    return { points: [], currency: 'EUR', error: null };
   }
 
   const url = buildSpendTrendOrdersUrl();
   const token = getCookie(AUTH_DROPIN_TOKEN_COOKIE);
   if (!url || !token) {
     console.warn('[DashboardService] Spend trend: missing REST URL or auth token.');
-    return { points: [], currency: 'GBP', error: 'configuration' };
+    return { points: [], currency: 'EUR', error: 'configuration' };
   }
 
   let response;
@@ -680,7 +680,7 @@ async function fetchSpendTrend() {
     });
   } catch (err) {
     console.warn('[DashboardService] Spend trend request failed:', err?.message ?? err);
-    return { points: [], currency: 'GBP', error: 'network' };
+    return { points: [], currency: 'EUR', error: 'network' };
   }
 
   if (!response.ok) {
@@ -696,7 +696,7 @@ async function fetchSpendTrend() {
       response.statusText,
       bodySnippet,
     );
-    return { points: [], currency: 'GBP', error: 'http' };
+    return { points: [], currency: 'EUR', error: 'http' };
   }
 
   let json;
@@ -704,7 +704,7 @@ async function fetchSpendTrend() {
     json = await response.json();
   } catch (err) {
     console.warn('[DashboardService] Spend trend: invalid JSON', err?.message ?? err);
-    return { points: [], currency: 'GBP', error: 'parse' };
+    return { points: [], currency: 'EUR', error: 'parse' };
   }
 
   const normalised = normaliseSpendTrendPayload(json);
@@ -749,7 +749,7 @@ const GET_COMPANY_CREDIT_DASHBOARD = `
  */
 function normaliseRestCompanyCredit(data) {
   if (data == null || typeof data !== 'object') return null;
-  const currency = data.currency_code ?? data.currencyCode ?? 'GBP';
+  const currency = data.currency_code ?? data.currencyCode ?? 'EUR';
   const toNum = (v) => {
     const n = Number(v);
     return Number.isFinite(n) ? n : NaN;
@@ -882,7 +882,7 @@ async function fetchCompanyCreditDashboard() {
   const creditLimit = Number(c.credit_limit.value);
   const outstandingBalance = Number(c.outstanding_balance?.value ?? 0);
   const availableCredit = Number(c.available_credit?.value ?? 0);
-  const currency = c.credit_limit.currency || 'GBP';
+  const currency = c.credit_limit.currency || 'EUR';
 
   if (!Number.isFinite(creditLimit)) {
     return { error: 'no_credit' };
@@ -1156,7 +1156,7 @@ export const DashboardService = {
       this.fetchEquipmentStock(),
       isAuthenticated
         ? fetchSpendTrend()
-        : Promise.resolve({ points: [], currency: 'GBP', error: null }),
+        : Promise.resolve({ points: [], currency: 'EUR', error: null }),
       isAuthenticated
         ? fetchCompanyCreditDashboard()
         : Promise.resolve({ error: null, skip: true }),
@@ -1164,7 +1164,7 @@ export const DashboardService = {
 
     let spendTrendData = spendTrendResult.status === 'fulfilled'
       ? spendTrendResult.value
-      : { points: [], currency: 'GBP', error: 'network' };
+      : { points: [], currency: 'EUR', error: 'network' };
 
     const ordersDataResolved = ordersResult.status === 'fulfilled' ? ordersResult.value : null;
 

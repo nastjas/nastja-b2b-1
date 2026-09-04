@@ -531,7 +531,7 @@ export default function decorate(block) {
       updateKpiSection(kpiSection, { ordersData: null, stockData: [], isAuthenticated });
       updateSpendTrendSection(
         spendTrendSection,
-        { points: [], currency: 'GBP', error: 'network' },
+        { points: [], currency: 'EUR', error: 'network' },
         isAuthenticated,
         null,
       );
