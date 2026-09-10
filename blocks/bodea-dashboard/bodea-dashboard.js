@@ -50,6 +50,7 @@ import {
 } from './dashboard-map.js';
 import { EQUIPMENT_DISPLAY_NAMES, PRIMARY_EQUIPMENT_SKU } from './dashboard-config.js';
 import { DashboardService } from './dashboard-service.js';
+import { shouldUseDemoData, getDemoDashboardData } from './dashboard-demo-data.js';
 
 /* ── Placeholder notifications ─────────────────────────────────────────── */
 // PLACEHOLDER: Sample dispatch/operations notifications for demo purposes.
@@ -470,13 +471,26 @@ export default function decorate(block) {
 
   const loadDashboardData = async () => {
     try {
-      const {
+      let {
         customerIdentity,
         ordersData,
         stockData,
         spendTrendData,
         companyCreditData,
       } = await DashboardService.loadAll();
+
+      /* Demo mode: inject a full, realistic dataset for the pitch when the
+         logged-in persona has no live orders (see dashboard-demo-data.js). */
+      const demoMode = shouldUseDemoData(customerIdentity);
+      if (demoMode) {
+        const demo = getDemoDashboardData(customerIdentity);
+        customerIdentity = demo.customerIdentity;
+        ordersData = demo.ordersData;
+        stockData = demo.stockData;
+        spendTrendData = demo.spendTrendData;
+        companyCreditData = demo.companyCreditData;
+      }
+      const effectiveAuth = isAuthenticated || demoMode;
 
       /* Update topbar account name — uses dedicated identity query, independent of orders */
       updateAccountName(topBar, customerIdentity);
@@ -501,20 +515,20 @@ export default function decorate(block) {
       }
 
       /* Update KPI cards */
-      updateKpiSection(kpiSection, { ordersData, stockData, isAuthenticated });
+      updateKpiSection(kpiSection, { ordersData, stockData, isAuthenticated: effectiveAuth });
 
       /* Spend trend + company credit panels */
-      updateSpendTrendSection(spendTrendSection, spendTrendData, isAuthenticated, ordersData);
-      updateCompanyCreditSection(companyCreditSection, companyCreditData, isAuthenticated);
+      updateSpendTrendSection(spendTrendSection, spendTrendData, effectiveAuth, ordersData);
+      updateCompanyCreditSection(companyCreditSection, companyCreditData, effectiveAuth);
 
       /* Update orders table */
-      updateOrdersSection(ordersSection, ordersData, isAuthenticated);
+      updateOrdersSection(ordersSection, ordersData, effectiveAuth);
 
       /* Update stock alerts */
       updateStockSection(stockSection, stockData);
 
       /* Update deliveries panel */
-      updateDeliveriesPanel(bottomSection, ordersData, isAuthenticated);
+      updateDeliveriesPanel(bottomSection, ordersData, effectiveAuth);
 
       /* Re-sync address book after other GraphQL (company context); */
       /* bodea-delivery-sites-changed refreshes the map */

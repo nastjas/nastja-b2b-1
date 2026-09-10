@@ -66,6 +66,11 @@ const ICONS = {
     <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
   </svg>`,
 
+  complaints: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M3 7v6a2 2 0 0 0 2 2h11l4 4V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/>
+    <path d="M9 15l6-6M15 15L9 9"/>
+  </svg>`,
+
   chevronRight: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <polyline points="9 18 15 12 9 6"/>
   </svg>`,

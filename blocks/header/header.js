@@ -221,6 +221,19 @@ export default async function decorate(block) {
       });
   }
 
+  // Gate the "Dashboard" nav entry so it only shows for logged-in (company) users.
+  // The B2B dashboard is customer/company-scoped, so guests should not see the link.
+  const dashboardItem = navSections
+    ?.querySelector('.default-content-wrapper a[href="/dashboard"], .default-content-wrapper a[href$="--nastjas.aem.page/dashboard"]')
+    ?.closest('li');
+  if (dashboardItem) {
+    const applyDashboardVisibility = (authed) => {
+      dashboardItem.hidden = !authed;
+    };
+    applyDashboardVisibility(Boolean(events.lastPayload('authenticated')));
+    events.on('authenticated', (authed) => applyDashboardVisibility(Boolean(authed)), { eager: true });
+  }
+
   const navTools = nav.querySelector('.nav-tools');
 
   /** Wishlist */
