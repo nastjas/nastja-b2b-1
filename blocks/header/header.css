@@ -151,9 +151,16 @@ header nav .nav-brand {
 header nav .nav-brand a {
   grid-area: brand;
   flex-basis: auto;
-  font: var(--type-headline-1-font);
-  letter-spacing: var(--type-headline-1-letter-spacing);
-  font-weight: bold;
+  display: inline-block;
+  width: 210px;
+  height: 40px;
+
+  /* Logo served from the code bus (not the content pipeline) */
+  background: url('/icons/ms-logo.svg') no-repeat left center;
+  background-size: contain;
+  overflow: hidden;
+  white-space: nowrap;
+  text-indent: -9999px;
 }
 
 li.nav-drop img {
