@@ -14,12 +14,15 @@
  */
 :root:root,
 .dropin-design.dropin-design {
-  /* Brand palette (from the MS Motorservice corporate site) */
-  --ms-blue: #0f72b5;          /* primary */
-  --ms-blue-dark: #0c5b90;     /* primary hover */
-  --ms-navy: #00406e;          /* secondary */
+  /* Brand palette — Motorservice / Rheinmetall Corporate Design (Styleguide 2024/2025).
+     RM Mittelblau is the primary, RM Dunkelblau the dominant headline/text tone,
+     RM Schattenblau the deepest shade, Rot the signal accent. */
+  --ms-blue: #007ec1;          /* RM Mittelblau — primary */
+  --ms-blue-dark: #0069a3;     /* primary hover (darkened Mittelblau) */
+  --ms-navy: #00406e;          /* RM Dunkelblau — secondary / headlines */
   --ms-navy-dark: #003358;     /* secondary active */
-  --ms-red: #d10019;           /* accent */
+  --ms-shadow-blue: #000824;   /* RM Schattenblau — deepest shade */
+  --ms-red: #d10019;           /* accent / signal */
   --ms-black: #1a1a1a;
   --ms-white: #fff;
   --ms-muted: #6b7280;
@@ -46,4 +49,18 @@
   /* Content links → navy text, blue on hover (matches corporate site tone) */
   --link-color: var(--ms-navy);
   --link-hover-color: var(--ms-blue);
+}
+
+/*
+ * Brand headline treatment (Styleguide 2025 "kommunikative Headline"):
+ * headings in RM Dunkelblau with slightly tighter tracking, left-aligned.
+ * Scoped to authored content headings only (low specificity) so dropin
+ * components keep their own heading styles where they set them explicitly.
+ */
+main h1,
+main h2,
+main h3,
+main h4 {
+  color: var(--ms-navy);
+  letter-spacing: 0.01em;
 }
