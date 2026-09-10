@@ -149,6 +149,14 @@ export const NAV_ITEMS = [
     icon: 'companyUsers',
   },
   {
+    id: 'complaints',
+    label: 'Complaints',
+    /** Mock-up complaints/returns workspace (RFP F-12). */
+    href: '/complaints',
+    matchPaths: ['/complaints'],
+    icon: 'complaints',
+  },
+  {
     id: 'materials',
     label: 'Order Parts',
     href: '/order',
