@@ -28,7 +28,10 @@ import { buildSpendTrendFromOrders } from './dashboard-service.js';
  * Fill in the demo persona's email, e.g. 'lisa.becker@becker-grosshandel.de'.
  * @type {string[]}
  */
-export const DEMO_DASHBOARD_EMAILS = [];
+export const DEMO_DASHBOARD_EMAILS = [
+  'mark@adobedemo.com',
+  'nschutschenk@adobe.com',
+];
 
 const DEMO_CURRENCY = 'EUR';
 
