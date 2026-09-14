@@ -85,7 +85,9 @@ function buildPanel(slideEl) {
   const panel = document.createElement('div');
   panel.className = 'hero-carousel__panel';
   // Remaining children (text + CTAs) become the overlay content, in order.
+  // Skip empty paragraphs left behind after the media/video was extracted.
   [...slideEl.querySelectorAll('p, h1, h2, h3, h4, h5, h6')].forEach((el) => {
+    if (el.textContent.trim() === '' && !el.querySelector('a, img, picture')) return;
     panel.appendChild(el);
   });
   return panel;
