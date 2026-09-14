@@ -16,6 +16,7 @@
  * @param {Element} block The block element
  */
 
+// Products around the engine (Pierburg / thermal etc.)
 const CATEGORIES = [
   { label: 'Thermal Management', key: 'thermal-management' },
   { label: 'Sensors', key: 'sensors' },
@@ -23,6 +24,28 @@ const CATEGORIES = [
   { label: 'Turbochargers', key: 'turbochargers' },
   { label: 'Exhaust Gas Recirculation', key: 'exhaust-gas-recirculation' },
   { label: 'Vacuum Pumps', key: 'vacuum-pumps' },
+];
+
+// Products in the engine (Kolbenschmidt / TRW / BF …) — nested under the parent category
+const CATEGORIES_ENGINE = [
+  { label: 'All engine parts', key: 'products-in-the-engine' },
+  { label: 'Camshafts', key: 'products-in-the-engine/camshafts' },
+  { label: 'Connecting rods', key: 'products-in-the-engine/connecting-rods' },
+  { label: 'Crankcases', key: 'products-in-the-engine/crankcases' },
+  { label: 'Crankshafts', key: 'products-in-the-engine/crankshafts' },
+  { label: 'Cylinder heads', key: 'products-in-the-engine/cylinder-heads' },
+  { label: 'Cylinder liners', key: 'products-in-the-engine/cylinder-liners' },
+  { label: 'Engine bearings', key: 'products-in-the-engine/engine-bearings' },
+  { label: 'Engine cooling', key: 'products-in-the-engine/engine-cooling' },
+  { label: 'Filters (Hardparts)', key: 'products-in-the-engine/filters-hardparts' },
+  { label: 'Flywheels', key: 'products-in-the-engine/flywheels' },
+  { label: 'Liquids and lubricants', key: 'products-in-the-engine/liquids-and-lubricants' },
+  { label: 'Oil Supply', key: 'products-in-the-engine/oil-supply' },
+  { label: 'Piston rings', key: 'products-in-the-engine/piston-rings' },
+  { label: 'Pistons', key: 'products-in-the-engine/pistons' },
+  { label: 'Timing chain kits', key: 'products-in-the-engine/timing-chain-kits' },
+  { label: 'Tools and test devices', key: 'products-in-the-engine/tools-and-test-devices' },
+  { label: 'Valves and valve accessories', key: 'products-in-the-engine/valves-and-valve-accessories' },
 ];
 
 const BRANDS = ['Kolbenschmidt', 'Pierburg', 'BF', 'TRW Engine Components', 'Turbo by INTEC'];
@@ -131,6 +154,37 @@ function buildNumberTab() {
 
 /* ── Tab: by category & attributes ──────────────────────────────────────── */
 
+// Product-group select with two optgroups (in-engine + around-engine)
+function buildGroupSelect() {
+  const field = document.createElement('div');
+  field.className = 'product-finder__field';
+  const lbl = document.createElement('label');
+  lbl.textContent = 'Product group';
+  lbl.htmlFor = 'pf-group';
+  const select = document.createElement('select');
+  select.id = 'pf-group';
+  select.name = 'group';
+  const all = document.createElement('option');
+  all.value = '';
+  all.textContent = 'All product groups';
+  select.append(all);
+  const addGroup = (label, items) => {
+    const og = document.createElement('optgroup');
+    og.label = label;
+    items.forEach((it) => {
+      const o = document.createElement('option');
+      o.value = it.key;
+      o.textContent = it.label;
+      og.append(o);
+    });
+    select.append(og);
+  };
+  addGroup('Products in the engine', CATEGORIES_ENGINE);
+  addGroup('Products around the engine', CATEGORIES);
+  field.append(lbl, select);
+  return { field, select };
+}
+
 function buildCategoryTab() {
   const panel = document.createElement('div');
   panel.className = 'product-finder__panel';
@@ -138,7 +192,7 @@ function buildCategoryTab() {
   const form = document.createElement('form');
   form.className = 'product-finder__form product-finder__form--grid';
 
-  const group = buildSelect('group', 'Product group', CATEGORIES, 'All product groups');
+  const group = buildGroupSelect();
   const brand = buildSelect('brand', 'Brand', BRANDS, 'All brands');
   const fitting = buildSelect('fitting', 'Fitting position', FITTING_POSITIONS, 'Any position');
 
