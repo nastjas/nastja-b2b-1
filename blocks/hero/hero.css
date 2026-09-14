@@ -43,17 +43,21 @@
   min-height: 480px;
   padding: 64px 24px;
   color: var(--ms-white);
+
+  /* establish a stacking context so image < gradient < content layer cleanly */
+  z-index: 0;
 }
 
-.hero.welcome picture {
-  z-index: -2;
+/* hero.js moves the picture to be a direct child (full-bleed background) */
+.hero.welcome > picture {
+  z-index: 0;
 }
 
 .hero.welcome::before {
   content: '';
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 1;
   background: linear-gradient(
     100deg,
     rgb(0 51 88 / 88%) 0%,
@@ -63,6 +67,8 @@
 }
 
 .hero.welcome > div {
+  position: relative;
+  z-index: 2;
   max-width: 1264px;
   margin: 0 auto;
   width: 100%;
@@ -72,8 +78,7 @@
   max-width: 620px;
   padding: 32px 36px;
   border-radius: 10px;
-  background: rgb(0 32 56 / 72%);
-  backdrop-filter: blur(2px);
+  background: rgb(0 32 56 / 78%);
   box-shadow: 0 8px 30px rgb(0 0 0 / 25%);
 }
 
