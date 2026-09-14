@@ -71,6 +71,10 @@ const ICONS = {
     <path d="M9 15l6-6M15 15L9 9"/>
   </svg>`,
 
+  quickOrder: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/>
+  </svg>`,
+
   chevronRight: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <polyline points="9 18 15 12 9 6"/>
   </svg>`,
