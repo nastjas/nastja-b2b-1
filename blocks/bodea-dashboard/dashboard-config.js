@@ -164,6 +164,14 @@ export const NAV_ITEMS = [
     icon: 'materials',
   },
   {
+    id: 'quick-order',
+    label: 'Quick Order',
+    /** Boilerplate B2B quick-order page (fast article-number / CSV entry). */
+    href: '/quick-order',
+    matchPaths: ['/quick-order'],
+    icon: 'quickOrder',
+  },
+  {
     id: 'locations',
     label: 'Locations',
     /** DA `locations` (`locations.html`) — Bodea Address Book (map + addresses). */
