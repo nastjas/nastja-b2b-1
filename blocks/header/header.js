@@ -10,6 +10,7 @@ import { fetchPlaceholders, getProductLink, rootLink } from '../../scripts/comme
 import renderAuthCombine from './renderAuthCombine.js';
 import { renderAuthDropdown } from './renderAuthDropdown.js';
 import renderSellerAssistedBuyingBanner from './renderSellerAssistedBuyingBanner.js';
+import initPlatinumBanner from '../../scripts/platinum-banner.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -585,4 +586,7 @@ export default async function decorate(block) {
   if (isAuthenticated && getConfigValue('commerce-companies-enabled') === true) {
     await (await import('./renderCompanySwitcher.js')).default(navTools);
   }
+
+  /** Platinum Buyers personalised welcome banner (under the nav) */
+  initPlatinumBanner();
 }
