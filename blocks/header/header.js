@@ -222,20 +222,22 @@ export default async function decorate(block) {
       });
   }
 
-  // Gate B2B-only nav entries (Dashboard, Quick Order) so they only show for
-  // logged-in users; guests should not see them.
-  const gatedSelectors = ['a[href="/dashboard"]', 'a[href="/quick-order"]'];
-  const gatedItems = navSections
-    ? [...new Set(
-      gatedSelectors
-        .flatMap((sel) => [...navSections.querySelectorAll(`.default-content-wrapper ${sel}`)])
-        .map((a) => a.closest('li'))
-        .filter(Boolean),
-    )]
+  // Gate nav entries by auth state (top-level items):
+  //  - Authenticated only: My Account (dropdown), Quick Order, Dashboard.
+  //  - Guests only:        Register, Request Form.
+  const topLevelNavItems = navSections
+    ? [...navSections.querySelectorAll('.default-content-wrapper > ul > li')]
     : [];
-  if (gatedItems.length) {
+  const authedSel = 'a[href="/customer/account"], a[href="/dashboard"], a[href="/quick-order"]';
+  const guestSel = 'a[href="/customer/create"], a[href="/request-form"]';
+  const authedOnlyItems = topLevelNavItems.filter((li) => li.querySelector(authedSel));
+  const guestOnlyItems = topLevelNavItems.filter(
+    (li) => li.querySelector(guestSel) && !li.querySelector(authedSel),
+  );
+  if (authedOnlyItems.length || guestOnlyItems.length) {
     const applyAuthVisibility = (authed) => {
-      gatedItems.forEach((li) => { li.hidden = !authed; });
+      authedOnlyItems.forEach((li) => { li.hidden = !authed; });
+      guestOnlyItems.forEach((li) => { li.hidden = Boolean(authed); });
     };
     applyAuthVisibility(Boolean(events.lastPayload('authenticated')));
     events.on('authenticated', (authed) => applyAuthVisibility(Boolean(authed)), { eager: true });
