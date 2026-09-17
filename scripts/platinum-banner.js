@@ -73,9 +73,16 @@ function render(firstname) {
   main.insertAdjacentElement('afterbegin', bar);
 }
 
+/** Full-page dashboard/takeover blocks — the banner must not render over these. */
+const DASHBOARD_BLOCKS = '.bodea-dashboard, .bodea-orders-list, .bodea-invoices-list, '
+  + '.bodea-company-users, .bodea-address-book, .bodea-order-new-delivery, '
+  + '.bodea-complaints, .bodea-reports';
+
 async function show() {
   if (isDismissed()) return;
   if (!checkIsAuthenticated()) return;
+  // Skip on dashboard takeover pages (they own the full viewport + greet the user themselves).
+  if (document.querySelector(DASHBOARD_BLOCKS)) return;
   if (document.querySelector('.platinum-banner')) return;
   const identity = await fetchIdentity();
   if (isPlatinum(identity?.email)) {
