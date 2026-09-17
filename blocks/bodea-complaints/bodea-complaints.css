@@ -1,3 +1,6 @@
+/* Dashboard shell (nav, top bar, layout) — must load via CSS @import; JS cannot import .css in the browser. */
+@import url('../bodea-dashboard/bodea-dashboard.css');
+
 /*
  * Bodea Complaints & Returns — MOCK-UP styles.
  * Reuses the dashboard shell (.bodea-dashboard / .bodea-dashboard-content).

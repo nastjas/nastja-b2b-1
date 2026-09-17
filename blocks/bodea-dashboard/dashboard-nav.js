@@ -158,7 +158,7 @@ export function buildNav(pathname) {
   footer.className = 'bodea-nav__footer';
   footer.innerHTML = `
     <div class="bodea-nav__footer-brand">
-      <span class="bodea-nav__footer-text">Bodea</span>
+      <span class="bodea-nav__footer-text">Motorservice</span>
     </div>
   `;
   nav.appendChild(footer);
