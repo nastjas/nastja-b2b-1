@@ -673,7 +673,7 @@ function renderEquipmentCards(state, errors) {
           </div>
           <div class="ond-equipment-card__info">
             <div class="ond-equipment-card__name">${escapeHtml(shortName)}</div>
-            <span class="ond-equipment-card__material">${escapeHtml(formatMaterial(product.material))}</span>
+            <span class="ond-equipment-card__material">${escapeHtml(product.brand || formatMaterial(product.material))}</span>
             ${priceRow}
           </div>
         </div>

@@ -295,7 +295,7 @@ export function buildTopBar(navElement) {
           </div>
           <div class="bodea-topbar__account-text">
             <span class="bodea-topbar__account-name bodea-topbar__account-name--loading">Loading…</span>
-            <span class="bodea-topbar__account-role">Bodea customer</span>
+            <span class="bodea-topbar__account-role">Motorservice customer</span>
           </div>
           <svg class="bodea-topbar__account-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="6 9 12 15 18 9"/>

@@ -1,34 +1,44 @@
-import { EQUIPMENT_CATALOG_NAMES } from '../bodea-dashboard/dashboard-config.js';
-
+/**
+ * Products offered in the "Order Parts" wizard.
+ * Real MS Motorservice catalogue SKUs so prices resolve via Catalog Service.
+ * `material` only tints the product icon (blue = Kolbenschmidt, red = BF,
+ * navy = Pierburg); `brand` is shown on the card.
+ */
 export const EQUIPMENT_PRODUCTS = [
   {
-    label: EQUIPMENT_CATALOG_NAMES['ASC2-205-55-R16'],
-    sku: 'ASC2-205-55-R16',
+    label: 'Piston – Kolbenschmidt',
+    sku: 'MS-PIS-01',
+    brand: 'Kolbenschmidt',
     material: 'all-season',
   },
   {
-    label: EQUIPMENT_CATALOG_NAMES['EC6-225-45-R18'],
-    sku: 'EC6-225-45-R18',
+    label: 'Piston Ring Set – Kolbenschmidt',
+    sku: 'MS-PRG-01',
+    brand: 'Kolbenschmidt',
+    material: 'all-season',
+  },
+  {
+    label: 'Main Bearing Set – Kolbenschmidt',
+    sku: 'MS-BRG-01',
+    brand: 'Kolbenschmidt',
+    material: 'all-season',
+  },
+  {
+    label: 'Camshaft – Kolbenschmidt',
+    sku: 'MS-CAM-01',
+    brand: 'Kolbenschmidt',
+    material: 'all-season',
+  },
+  {
+    label: 'Thermostat with Housing – BF',
+    sku: 'MS-THM-01',
+    brand: 'BF',
     material: 'summer',
   },
   {
-    label: EQUIPMENT_CATALOG_NAMES['PC7-245-40-R19'],
-    sku: 'PC7-245-40-R19',
-    material: 'summer',
-  },
-  {
-    label: EQUIPMENT_CATALOG_NAMES['WT870P-225-45-R18'],
-    sku: 'WT870P-225-45-R18',
-    material: 'winter',
-  },
-  {
-    label: EQUIPMENT_CATALOG_NAMES['SC7-255-35-R20'],
-    sku: 'SC7-255-35-R20',
-    material: 'summer',
-  },
-  {
-    label: EQUIPMENT_CATALOG_NAMES['WT870P-245-40-R19'],
-    sku: 'WT870P-245-40-R19',
+    label: 'Electric Water Pump – Pierburg',
+    sku: 'MS-WPU-01',
+    brand: 'Pierburg',
     material: 'winter',
   },
 ];

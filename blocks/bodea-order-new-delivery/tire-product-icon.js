@@ -1,7 +1,7 @@
 /**
- * MS Motorservice engine-component icon (gear / cog), tinted by category.
+ * MS Motorservice part icon (wrench), tinted by category.
  * Shared by bodea-order-new-delivery wizard and bodea-orders-list product previews.
- * (Kept the original export name so existing imports keep working.)
+ * (Export name kept for backwards compatibility with existing imports.)
  *
  * @param {string} season category key (all-season | summer | winter or any)
  * @param {{ className?: string }} [opts]
@@ -11,17 +11,14 @@ export function renderTireProductIcon(season, opts = {}) {
   const { className } = opts;
   // Accent colour per category (MS Motorservice palette).
   const colors = {
-    'all-season': '#0f72b5', // ms-blue
-    summer: '#d10019', // ms-red
-    winter: '#00406e', // ms-navy
+    'all-season': '#0f72b5', // ms-blue (Kolbenschmidt)
+    summer: '#d10019', // ms-red (BF)
+    winter: '#00406e', // ms-navy (Pierburg)
   };
   const accent = colors[season] || colors['all-season'];
   const classAttr = className ? ` class="${className}"` : '';
   return `<svg${classAttr} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <circle cx="16" cy="16" r="15" fill="${accent}" opacity="0.12"/>
-    <g fill="none" stroke="${accent}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
-      <path d="M16 6.2l1.4 2.6 2.9-.5 1 2.8 2.8 1-.5 2.9 2.6 1.4-2.6 1.4.5 2.9-2.8 1-1 2.8-2.9-.5L16 25.8l-1.4-2.6-2.9.5-1-2.8-2.8-1 .5-2.9L5.8 16l2.6-1.4-.5-2.9 2.8-1 1-2.8 2.9.5z"/>
-      <circle cx="16" cy="16" r="4"/>
-    </g>
+    <rect x="1" y="1" width="30" height="30" rx="7" fill="${accent}" opacity="0.12"/>
+    <path d="M22 7.6a4.6 4.6 0 0 0-5.9 5.9L7.5 22.1a1.8 1.8 0 0 0 2.5 2.5l8.6-8.6A4.6 4.6 0 0 0 24.4 10l-2.7 2.7-2.2-.6-.6-2.2L22 7.6z" fill="none" stroke="${accent}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
   </svg>`;
 }
