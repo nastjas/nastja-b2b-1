@@ -222,17 +222,23 @@ export default async function decorate(block) {
       });
   }
 
-  // Gate the "Dashboard" nav entry so it only shows for logged-in (company) users.
-  // The B2B dashboard is customer/company-scoped, so guests should not see the link.
-  const dashboardItem = navSections
-    ?.querySelector('.default-content-wrapper a[href="/dashboard"], .default-content-wrapper a[href$="--nastjas.aem.page/dashboard"]')
-    ?.closest('li');
-  if (dashboardItem) {
-    const applyDashboardVisibility = (authed) => {
-      dashboardItem.hidden = !authed;
+  // Gate B2B-only nav entries (Dashboard, Quick Order) so they only show for
+  // logged-in users; guests should not see them.
+  const gatedSelectors = ['a[href="/dashboard"]', 'a[href="/quick-order"]'];
+  const gatedItems = navSections
+    ? [...new Set(
+      gatedSelectors
+        .flatMap((sel) => [...navSections.querySelectorAll(`.default-content-wrapper ${sel}`)])
+        .map((a) => a.closest('li'))
+        .filter(Boolean),
+    )]
+    : [];
+  if (gatedItems.length) {
+    const applyAuthVisibility = (authed) => {
+      gatedItems.forEach((li) => { li.hidden = !authed; });
     };
-    applyDashboardVisibility(Boolean(events.lastPayload('authenticated')));
-    events.on('authenticated', (authed) => applyDashboardVisibility(Boolean(authed)), { eager: true });
+    applyAuthVisibility(Boolean(events.lastPayload('authenticated')));
+    events.on('authenticated', (authed) => applyAuthVisibility(Boolean(authed)), { eager: true });
   }
 
   const navTools = nav.querySelector('.nav-tools');
