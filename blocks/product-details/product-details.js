@@ -759,7 +759,7 @@ function setMetaTags(product) {
     return;
   }
 
-  const price = product.prices.final.minimumAmount ?? product.prices.final.amount;
+  const price = product?.prices?.final?.minimumAmount ?? product?.prices?.final?.amount;
 
   createMetaTag('title', product.metaTitle || product.name, 'name');
   createMetaTag('description', product.metaDescription, 'name');
@@ -770,11 +770,16 @@ function setMetaTags(product) {
   createMetaTag('og:title', product.metaTitle || product.name, 'property');
   createMetaTag('og:url', window.location.href, 'property');
   const mainImage = product?.images?.filter((image) => image.roles.includes('thumbnail'))[0];
-  const metaImage = mainImage?.url || product?.images[0]?.url;
+  const metaImage = mainImage?.url || product?.images?.[0]?.url;
   createMetaTag('og:image', metaImage, 'property');
   createMetaTag('og:image:secure_url', metaImage, 'property');
-  createMetaTag('product:price:amount', price.value, 'property');
-  createMetaTag('product:price:currency', price.currency, 'property');
+  // Guard against a missing price (e.g. complex products with no single amount, or
+  // a price that has not resolved yet): skip the price meta tags instead of throwing,
+  // which would abort PDP decoration.
+  if (price?.value != null) {
+    createMetaTag('product:price:amount', price.value, 'property');
+    createMetaTag('product:price:currency', price.currency, 'property');
+  }
 }
 
 /**
