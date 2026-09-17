@@ -182,7 +182,7 @@ export const NAV_ITEMS = [
   {
     id: 'reports',
     label: 'Reports',
-    href: '/order-list',
+    href: '/reports',
     matchPaths: ['/reports'],
     icon: 'reports',
   },
