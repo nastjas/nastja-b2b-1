@@ -13,7 +13,7 @@ import { events } from '@dropins/tools/event-bus.js';
 import { CORE_FETCH_GRAPHQL, checkIsAuthenticated } from './commerce.js';
 
 /** Login emails that belong to the Platinum Buyers group (demo control). */
-const PLATINUM_EMAILS = ['marc@adobedemo.com', 'mark@adobedemo.com'];
+const PLATINUM_EMAILS = ['marc@adobedemo.com', 'mark@adobedemo.com', 'nschutschenk@adobe.com'];
 
 const DISMISS_KEY = 'ms-platinum-banner-dismissed';
 const IDENTITY_QUERY = 'query PlatinumIdentity { customer { firstname lastname email } }';
@@ -78,9 +78,18 @@ const DASHBOARD_BLOCKS = '.bodea-dashboard, .bodea-orders-list, .bodea-invoices-
   + '.bodea-company-users, .bodea-address-book, .bodea-order-new-delivery, '
   + '.bodea-complaints, .bodea-reports';
 
+/** Homepage owns its own Platinum banner via an authored `targeted-block`. */
+function isHome() {
+  const { pathname } = window.location;
+  return pathname === '/' || pathname === '/index';
+}
+
 async function show() {
   if (isDismissed()) return;
   if (!checkIsAuthenticated()) return;
+  // The homepage renders the Platinum banner as an authored targeted-block, so
+  // skip the JS banner there to avoid a duplicate.
+  if (isHome()) return;
   // Skip on dashboard takeover pages (they own the full viewport + greet the user themselves).
   if (document.querySelector(DASHBOARD_BLOCKS)) return;
   if (document.querySelector('.platinum-banner')) return;
